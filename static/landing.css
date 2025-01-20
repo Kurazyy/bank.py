@@ -1,0 +1,370 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.6;
+    text-align: center; /* We’ll override as needed */
+}
+
+/* Header */
+.header {
+    background-color: #000000; /* Dark Interac-brown */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header-left img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.down-arrow,
+.header-title {
+    display: none; /* Not used, but we keep them in the HTML */
+}
+
+/* Right side of header */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Hide the original “Contact Us” / “About” from the main nav
+   so they appear only in the hamburger dropdown on small screens */
+.contact-link,
+.about-link {
+    display: none;
+}
+
+/* Français link */
+.fr-link {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* “?” icon */
+.help-icon {
+    background: white;
+    color: #3a2a17;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 0.8rem;
+}
+
+/* Hamburger Icon */
+.hamburger-icon {
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Hamburger dropdown menu */
+.hamburger-dropdown {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    text-align: left;
+    z-index: 999;
+}
+.hamburger-dropdown a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+}
+.hamburger-dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Content area */
+.content {
+    max-width: 1000px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    text-align: left; /* We want the text left-aligned like the screenshot */
+    padding: 0 20px;  /* Some side padding on mobile */
+}
+
+.content-left h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #3a2a17;
+}
+
+.amount {
+    font-size: 1.5rem;
+    color: #3a2a17;
+    margin-bottom: 10px;
+}
+
+.from-info {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Desktop “Expires / Reference” */
+.content-right {
+    font-size: 0.9rem;
+    position: absolute;
+    left: calc(50% + 20px);
+    top: 0;
+}
+
+/* Dividers */
+.divider {
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* Vertical divider between left + right in desktop */
+.vertical-divider {
+    border-left: 1px solid #ddd;
+    height: 150px;
+    position: absolute;
+    left: calc(50% - 1px);
+    top: 0;
+}
+
+/* Mobile-only “View Transfer Details” container
+   We'll hide it by default on desktop. */
+.dropdown-container {
+    display: none;
+}
+
+/* Bank Section */
+.bank-section {
+    max-width: 1200px;
+    margin: 20px auto;
+    text-align: left;  /* left-aligned to match the rest */
+    padding: 0 20px;
+    position: relative;
+}
+
+/* The row that holds the heading on left and search on right */
+.bank-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* heading on left, search on right */
+    margin-bottom: 10px;
+}
+
+/* The heading itself */
+.bank-section-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+/* The container with the search input + button */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* The small, round search input + button */
+.search-container input {
+    width: 100px;
+    height: 30px;
+    padding: 0 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.search-container button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background-color: #ffc107;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+/* The bank grid below */
+.bank-grid {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 columns on desktop */
+    gap: 5px;
+    justify-content: center;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+}
+
+.bank-box {
+    background-color: white;
+    border-radius: 8px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bank-box img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Dropdown Section (Credit Union, etc.) */
+.dropdown-section {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: left;
+    padding: 0 20px;
+}
+
+.dropdown-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.dropdown-section .dropdowns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.dropdown-section select {
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.deposit-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #ffc107;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.deposit-btn:hover {
+    background-color: #e6a800;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8rem;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+}
+
+/* --- Media Queries (Mobile) --- */
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 15px;
+    }
+    .header-left img {
+        height: 35px;
+    }
+    .header-right {
+        gap: 10px;
+    }
+
+    /* Hide the vertical divider on mobile. */
+    .vertical-divider {
+        display: none;
+    }
+
+    /* Stack content area on mobile (no absolute). */
+    .content {
+        display: block;
+        position: static;
+        text-align: left;
+        margin: 20px auto;
+    }
+    .content-right {
+        position: static;
+        margin-top: 10px;
+    }
+
+    /* Show the “View Transfer Details” block on mobile. */
+    .dropdown-container {
+        display: block;
+        margin-top: 10px;
+    }
+    .dropdown-trigger {
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+    }
+    .dropdown-trigger span {
+        font-size: 1.2rem;
+        transform: rotate(90deg);
+        transition: transform 0.2s;
+    }
+    .dropdown-content {
+        display: none;
+        margin-top: 10px;
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    /* 2 columns for banks on mobile. */
+    .bank-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    /* On mobile, we keep the heading & search bar side-by-side
+       unless you want them stacked—then set flex-direction: column. */
+    .bank-section-header {
+        /* If you want them stacked, uncomment:
+           flex-direction: column;
+           align-items: flex-start; 
+           gap: 10px;
+        */
+    }
+}
+
+/* End of CSS */

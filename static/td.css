@@ -1,0 +1,640 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: "Webly Sleek SemiLight", "Helvetica Neue", "Droid Sans", sans-serif;
+    background-color: #fff;
+    color: #000;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* ------------------------------------------------------------------ 
+   1) TOP WHITE BAR (Desktop Only)
+-------------------------------------------------------------------- */
+.td-top-white-bar {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+.td-top-white-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+.white-left-links a {
+    color: #333;
+    text-decoration: none;
+    margin-right: 15px;
+    font-weight: 300; 
+}
+.white-left-links a:hover {
+    text-decoration: underline;
+}
+.white-right-locale {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.flag-icon {
+    height: 16px;
+    vertical-align: middle;
+}
+.white-right-locale a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 300;
+}
+.white-right-locale a:hover {
+    text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------ 
+   2) MAIN GREEN BAR (Desktop Only)
+-------------------------------------------------------------------- */
+.td-main-green-bar {
+    background-color: #12412a; /* TD dark green */
+    color: #fff;
+}
+.td-greenbar-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+.td-logo-container {
+    margin-right: 20px;
+}
+.td-logo-container img {
+    height: 40px;
+}
+.td-greenbar-nav {
+    display: flex;
+    gap: 20px;
+}
+.td-greenbar-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 300;
+}
+.td-greenbar-nav a:hover {
+    text-decoration: underline;
+}
+.td-greenbar-right {
+    margin-left: auto; 
+    display: flex;
+    align-items: center;
+}
+.desktop-login-image {
+    width: 288px; /* enlarge login image */
+    height: auto;
+    display: block;
+}
+
+/* ------------------------------------------------------------------ 
+   3) MAIN WRAPPER
+-------------------------------------------------------------------- */
+.td-content-wrapper {
+    max-width: 1300px;
+    margin: 20px auto;
+    padding: 0 20px 40px;
+}
+.td-easyweb-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #008f2f;
+    font-weight: 300; 
+}
+
+/* ------------------------------------------------------------------ 
+   4) LIGHT-GREEN BOX (Login + Help)
+-------------------------------------------------------------------- */
+.td-login-box {
+    background-color: #f7f9f7;
+    display: flex;
+    max-width: 1150px;
+    margin: 20px auto 30px;
+}
+.login-column,
+.help-column {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.vertical-divider {
+    background-color: #ddd;
+    width: 1px;
+}
+.login-form {
+    margin-top: 10px;
+}
+.input-group {
+    margin-bottom: 20px;
+}
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 300; 
+}
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+.desc-optional {
+    margin-bottom: 20px;
+}
+.desc-optional a {
+    color: #008f2f;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+.password-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.remember-row {
+    margin: 20px 0;
+}
+/* Login button */
+.btn-login {
+    background-color: #008a00;
+    color: #fff;
+    border: none;
+    width: 180px; /* default for desktop */
+    height: 36px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 300;
+}
+.btn-login:hover {
+    background-color: #008f2f;
+}
+.forgot-link {
+    margin-top: 20px;
+}
+.forgot-link a {
+    color: #008f2f;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+.td-security {
+    margin-top: 20px;
+}
+.td-security img {
+    vertical-align: middle;
+    height: 16px;
+}
+.td-security a {
+    color: #008f2f;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+/* Right “Welcome” side */
+.help-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+.help-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #333;
+    font-weight: 300;
+}
+.btn-register {
+    border: 2px solid #008a00;
+    background-color: #fff;
+    color: #00a54f;
+    width: 200px; /* default for desktop */
+    height: 34px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 300;
+}
+.btn-register:hover {
+    background-color: #00a54f;
+    color: #fff;
+}
+.help-divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+.help-box {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+.help-box:last-of-type {
+    border-bottom: none;
+}
+.help-box h3 {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 300;
+}
+.help-box a {
+    color: #008f2f;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/* ------------------------------------------------------------------ 
+   5) “With TD Direct Investing…” area
+-------------------------------------------------------------------- */
+.td-offer-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 40px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    max-width: 1300px;
+}
+.offer-image img {
+    width: 300px;
+}
+.offer-content {
+    flex: 1;
+}
+.offer-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 300;
+}
+.offer-content p {
+    margin-bottom: 20px;
+    color: #444;
+    font-weight: 300;
+}
+.btn-offer {
+    border: 2px solid #00a54f;
+    background-color: #fff;
+    color: #006f54;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 300; 
+}
+.btn-offer:hover {
+    background-color: #008f2f;
+    color: #fff;
+}
+
+/* ------------------------------------------------------------------ 
+   6) Disclaimer
+-------------------------------------------------------------------- */
+.td-disclaimer {
+    max-width: 1300px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+    font-size: 0.95rem;
+    color: #444;
+    font-weight: 300;
+}
+.td-disclaimer a {
+    color: #008f2f;
+    text-decoration: underline;
+    font-weight: 300;
+}
+
+/* ------------------------------------------------------------------ 
+   7) New Bottom Footer
+-------------------------------------------------------------------- */
+.td-bottom-footer {
+    background-color: #174b30; /* Consistent green */
+    padding: 60px 20px;
+    color: #fff;
+    font-weight: 300;
+    text-align: center;
+}
+.footer-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+.footer-chair-container {
+    display: flex;
+    justify-content: left;
+}
+.footer-chair-img {
+    max-width: 300px;
+    height: auto;
+    display: block;
+}
+.footer-contact-connect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.footer-contact-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.footer-contact-row h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: #fff;
+    font-weight: 300;
+}
+.contact-us-link {
+    color: #00e68a;
+    text-decoration: underline;
+    font-size: 1rem;
+    font-weight: 300;
+}
+.contact-us-link:hover {
+    text-decoration: none;
+}
+.footer-social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.footer-social span {
+    font-size: 1rem;
+    font-weight: 300;
+}
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+.social-icons a img {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+.footer-links {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap;
+}
+.footer-links ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+}
+.footer-links ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+.footer-links ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Icons for the login button and security lock */
+.login-lock-img {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+.security-lock-img {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+/* =====================================
+   MOBILE HEADER & OVERLAY MENU
+   (shown only under 768px)
+====================================== */
+.td-mobile-header {
+    display: none; /* hidden on desktop by default */
+    background-color: #12412a;
+    padding: 10px;
+}
+.mobile-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.mobile-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.mobile-hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.hamburger-icon {
+    width: 30px;
+    height: 30px;
+}
+.td-mobile-logo {
+    height: 34px;
+}
+.mobile-login-icon {
+    height: 34px;
+}
+
+/* The sliding overlay menu */
+.mobile-nav-overlay {
+    display: none; /* hidden on desktop */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    max-width: 300px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 9999;
+    padding: 10px 15px;
+}
+.mobile-nav-overlay.open {
+    transform: translateX(0); /* slide in */
+}
+.mobile-nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.close-nav-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.overlay-divider {
+    margin: 10px 0;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+.mobile-nav-search {
+    margin: 10px 0 20px;
+}
+.mobile-nav-search input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.mobile-nav-links {
+    list-style: none;
+    padding: 0;
+}
+.mobile-nav-links li {
+    margin-bottom: 15px;
+}
+.mobile-nav-links li a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 400;
+}
+.mobile-nav-links li a:hover {
+    text-decoration: underline;
+}
+
+/* =====================================
+   MEDIA QUERIES FOR MOBILE
+====================================== */
+@media screen and (max-width: 768px) {
+  /* Hide desktop bars */
+  .td-top-white-bar,
+  .td-main-green-bar {
+    display: none;
+  }
+
+  /* Show the mobile header */
+  .td-mobile-header {
+    display: block;
+  }
+  .mobile-nav-overlay {
+    display: block; 
+  }
+
+  /* Hide the desktop login image within <picture> */
+  .desktop-login-image {
+    display: none;
+  }
+
+  /* Turn the login box into a single column */
+  .td-login-box {
+    flex-direction: column;
+    margin: 0; 
+    border: none;
+    padding: 10px;
+  }
+  .vertical-divider {
+    display: none;
+  }
+  .login-column,
+  .help-column {
+    width: 100%;
+    padding: 15px; 
+  }
+
+  /* 1) Make "Login" + "Register" full width */
+  .btn-login,
+  .btn-register {
+    width: 100%;
+    box-sizing: border-box; 
+  }
+
+  /* 2) Collapsible help boxes with plus sign */
+  .help-box {
+    cursor: pointer; /* Entire box clickable */
+    position: relative;
+  }
+
+  /* Hide the help content by default */
+  .help-box ul,
+  .help-box p {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  /* Once .open is toggled, reveal content */
+  .help-box.open ul,
+  .help-box.open p {
+    max-height: 500px; /* big enough to show the text */
+  }
+
+  /* Add the green plus circle next to <h3> */
+  .help-box h3 {
+    margin-bottom: 0.5rem; 
+    padding-left: 30px;
+    position: relative;
+  }
+  .help-box h3::before {
+    content: "+";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+    color: #008f2f;
+    border: 2px solid #008f2f;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 16px;
+    text-align: center;
+    margin-top: 2px;
+  }
+  /* Change plus to minus if help-box is .open */
+  .help-box.open h3::before {
+    content: "–";
+  }
+
+  /* Footer adjustments */
+  .footer-contact-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .social-icons a img {
+    width: 36px; 
+    height: 36px;
+  }
+  .footer-links ul {
+    flex-direction: column;
+  }
+  .footer-links ul li {
+    margin-bottom: 10px;
+  }
+}

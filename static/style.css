@@ -1,0 +1,282 @@
+/* 1) @font-face for Helvetica Neue Light */
+@font-face {
+  font-family: "Helvetica Neue Light";
+  src: url("fonts/HelveticaNeueLight.woff2") format("woff2"),
+       url("fonts/HelveticaNeueLight.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* RESET & GENERAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue Light", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  background-color: #f4f4f4; /* Light grey */
+  color: #333;
+}
+
+/* TOP MAROON BAR */
+.top-maroon-bar {
+  background-color: #861138;
+  padding: 5px 0;
+}
+
+.maroon-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bank-logo {
+  height: 40px;
+}
+
+.language-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* HERO BANNER */
+.hero-banner {
+  background: url("/static/images/banner-pattern.png") center / cover no-repeat, #c8102e;
+  text-align: center;
+  padding: 60px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.small-subtitle {
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-register a {
+  color: #ffe6e6;
+  text-decoration: underline;
+}
+
+/* MAIN LAYOUT */
+.main-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+/* CENTER BOX */
+.center-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+}
+
+/* LOGIN BOX */
+.login-box {
+  flex: 1 1 275px;
+  max-width: 500px;
+}
+
+.login-box h3 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.form-row {
+  margin-bottom: 10px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.btn-outline {
+  background-color: #fff;
+  border: 1px solid #c8102e;
+  color: #c8102e;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-outline:hover {
+  background-color: #fdd9d9;
+}
+
+.btn-primary {
+  background-color: #c8102e;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #a10d25;
+}
+
+/* PROMO SECTION */
+.promo-section {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 800px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.promo-section img {
+  width: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.promo-text {
+  flex: 1;
+  text-align: left;
+}
+
+.promo-text h5 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.promo-text a {
+  color: #c8102e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.promo-text a:hover {
+  text-decoration: underline;
+}
+
+/* DARK FOOTER */
+.dark-footer {
+  background-color: #333;
+  color: #ccc;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 40px 20px;
+  justify-content: center;
+}
+
+.footer-column {
+  flex: 1 1 180px;
+  max-width: 250px;
+}
+
+.footer-column h5 {
+  color: #fff;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.footer-column li {
+  margin-bottom: 5px;
+}
+
+.footer-column a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 992px) {
+  .center-box {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .promo-section {
+      flex-direction: column;
+      text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-content {
+      padding: 0 10px;
+  }
+
+  .hero-title {
+      font-size: 1.6rem;
+  }
+
+  .promo-section img {
+      width: 100%;
+  }
+}

