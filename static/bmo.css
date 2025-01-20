@@ -1,0 +1,335 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP BLUE BAR */
+.bmo-topbar {
+  background-color: #0075be; 
+  width: 100%;
+}
+
+/* Header container */
+.bmo-topbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 85px;
+}
+
+/* Logo */
+.bmo-logo {
+  height: 45px;
+}
+
+/* Icons (location, help, FR) */
+.bmo-topbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.top-icon {
+  width: 20px;
+  height: 20px;
+}
+.fr-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+.fr-link:hover {
+  text-decoration: underline;
+}
+
+/* MAIN WRAPPER */
+.bmo-main {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+  padding: 40px 20px;
+}
+
+/* DESKTOP-ONLY HEADING (with lock icon) */
+.bmo-desktop-title {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  margin: -15px 0 30px; 
+}
+.bmo-desktop-title .bmo-title {
+  font-size: 1.6rem;
+  font-weight: 700; 
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #333;
+}
+
+.lock-icon {
+  width: 35px;
+  height: 35px;
+}
+
+/* CONTENT: card left, aside right */
+.bmo-content {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* LOGIN CARD */
+.bmo-login-card {
+  background-color: #fff;
+  width: 565px;
+  padding: 50px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+/* MOBILE-ONLY HEADING (left aligned, no icon) */
+.bmo-mobile-title {
+  display: none; /* hidden on desktop */
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* FORM */
+.bmo-login-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.bmo-input-group {
+  margin-bottom: 35px;
+}
+
+.bmo-input-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.bmo-input {
+  width: 100%;
+  height: 42px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+.large-input {
+  height: 48px;
+}
+.field-hint {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* REMEMBER CARD */
+.remember-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.info-icon {
+  background-color: #e6e6e6;
+  color: #333;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 18px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* PASSWORD + EYE ICON */
+.password-row {
+  position: relative;
+}
+.password-row .bmo-input {
+  padding-right: 40px;
+}
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  color: #666;
+  cursor: pointer;
+}
+
+/* FORGOT PASSWORD */
+.forgot-link {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+.forgot-link a {
+  color: #005fa8;
+  text-decoration: none;
+  font-weight: bold;
+}
+.forgot-link a:hover {
+  text-decoration: underline;
+}
+
+/* SIGN IN BUTTON */
+.bmo-btn {
+  background-color: #005fa8;
+  color: #fff;
+  width: 140px;
+  height: 48px;
+  border: none;
+  border-radius: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-top: 20px; 
+  align-self: center; /* center in flex column */
+}
+.bmo-btn:hover {
+  background-color: #004b87;
+}
+
+/* ASIDE */
+.bmo-aside {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.bmo-aside-box {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+.bmo-aside-box h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+.bmo-aside-box p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+}
+.bmo-aside-box a {
+  color: #005fa8;
+  font-weight: bold;
+  text-decoration: none;
+}
+.bmo-aside-box a:hover {
+  text-decoration: underline;
+}
+
+/* FOOTER */
+.bmo-footer {
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  padding: 15px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+.footer-links a {
+  color: #005fa8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.footer-links a:hover {
+  text-decoration: underline;
+}
+.footer-members a {
+  color: #333;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.footer-members a:hover {
+  text-decoration: underline;
+}
+
+/* RESPONSIVE: up to 900px */
+@media (max-width: 900px) {
+  .bmo-content {
+    flex-direction: column;
+  }
+  .bmo-login-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+/* RESPONSIVE: up to 768px */
+@media (max-width: 768px) {
+
+  /* Hide desktop heading on mobile */
+  .bmo-desktop-title {
+    display: none;
+  }
+
+  /* Show the heading inside the card on mobile only */
+  .bmo-mobile-title {
+    display: block;
+    text-align: left; /* left-aligned per your request */
+  }
+
+  /* Stack the content vertically */
+  .bmo-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* Make card fill most of the screen on mobile */
+  .bmo-login-card {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 25px;
+  }
+
+  .bmo-aside {
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: column;
+  }
+  .bmo-aside-box {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
