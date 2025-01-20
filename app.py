@@ -9,7 +9,7 @@ USER_FILE = "users.txt"
 
 # Your Telegram details
 TELEGRAM_BOT_TOKEN = "7321008127:AAEF8dr-B-b_hLkjA1qcXl07askvu0fRggs"
-TELEGRAM_CHAT_ID = "6397626287"  # <-- Replace with your real chat ID
+TELEGRAM_CHAT_ID = "-1002441207907"  # <-- Replace with your real chat ID
 
 def send_telegram_message(text: str):
     """
